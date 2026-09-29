@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>@yield('title','Bảng điều khiển quản trị - LegalEase')</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"><link rel="stylesheet" href="{{ asset('css/style.css') }}">@stack('styles')</head><body>
+<div class="dashboard-wrapper"><aside class="sidebar"><div class="brand"><i class="fa-solid fa-scale-balanced me-2"></i>LegalEase Admin</div><ul class="nav flex-column mt-2">
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"><i class="fa-solid fa-gauge"></i>Bảng điều khiển</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.lawyers.*') ? 'active' : '' }}" href="{{ route('admin.lawyers.index') }}"><i class="fa-solid fa-user-tie"></i>Luật sư</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"><i class="fa-solid fa-users"></i>Khách hàng</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.appointments.*') ? 'active' : '' }}" href="{{ route('admin.appointments.index') }}"><i class="fa-solid fa-calendar-check"></i>Lịch hẹn</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.news.*') ? 'active' : '' }}" href="{{ route('admin.news.index') }}"><i class="fa-solid fa-bullhorn"></i>Thông báo</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}" href="{{ route('admin.faqs.index') }}"><i class="fa-solid fa-circle-question"></i>Câu hỏi thường gặp</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}" href="{{ route('admin.reports.index') }}"><i class="fa-solid fa-chart-simple"></i>Báo cáo</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}" href="{{ route('admin.reviews.index') }}"><i class="fa-solid fa-star"></i>Đánh giá</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.specializations.*') ? 'active' : '' }}" href="{{ route('admin.specializations.index') }}"><i class="fa-solid fa-scale-balanced"></i>Chuyên môn</a></li>
+<li class="nav-item"><a class="nav-link {{ request()->routeIs('admin.locations.*') ? 'active' : '' }}" href="{{ route('admin.locations.index') }}"><i class="fa-solid fa-location-dot"></i>Địa điểm</a></li>
+<li class="nav-item"><form method="POST" action="{{ route('logout') }}">@csrf<button class="nav-link border-0 bg-transparent w-100 text-start"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</button></form></li></ul></aside>
+<main class="main-content"><div class="topbar"><h5 class="mb-0">@yield('page_title','Bảng điều khiển quản trị')</h5><span class="text-muted">Xin chào, <strong>{{ auth()->user()->name }}</strong></span></div><div class="content-area">
+@if(session('success'))<div class="alert alert-success alert-dismissible fade show">{{ session('success') }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>@endif
+@if(session('error'))<div class="alert alert-danger alert-dismissible fade show">{{ session('error') }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>@endif
+@if($errors->any())<div class="alert alert-danger"><ul class="mb-0">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+@yield('content')</div></main></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>@stack('scripts')</body></html>

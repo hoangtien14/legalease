@@ -1,0 +1,4 @@
+@extends('layouts.app')
+@section('title','Thông báo pháp lý - LegalEase')
+@section('content')<div class="container py-5"><h2 class="section-title text-center">Thông báo pháp lý</h2><div class="row g-4">@forelse($news as $item)<div class="col-md-6 col-lg-4"><article class="card lawyer-card h-100"><div class="card-body"><div class="small text-muted mb-2"><i class="fa-regular fa-calendar me-1"></i>{{ $item->published_at?->format('d/m/Y') }}</div><h5>{{ $item->title }}</h5><p class="text-muted">{{ $item->excerpt }}</p><a class="btn btn-sm btn-outline-primary" href="#news-{{ $item->id }}">Xem chi tiết</a><div id="news-{{ $item->id }}" class="small mt-3">{{ $item->content }}</div></div></article></div>@empty<div class="col-12 text-center text-muted">Chưa có thông báo.</div>@endforelse</div></div>
+@endsection
